@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_01_210143) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_195222) do
+  create_table "event_attendances", force: :cascade do |t|
+    t.integer "attended_event_id"
+    t.integer "attendee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attended_event_id"], name: "index_event_attendances_on_attended_event_id"
+    t.index ["attendee_id"], name: "index_event_attendances_on_attendee_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.integer "creator_id"
     t.string "title"
@@ -19,6 +28,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_210143) do
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "attendee_id"
+    t.index ["attendee_id"], name: "index_events_on_attendee_id"
     t.index ["creator_id"], name: "index_events_on_creator_id"
   end
 
@@ -31,10 +42,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_210143) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "attendance_id"
+    t.index ["attendance_id"], name: "index_users_on_attendance_id"
     t.index ["creator_id"], name: "index_users_on_creator_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "events", column: "attendee_id"
+  add_foreign_key "users", "users", column: "attendance_id"
   add_foreign_key "users", "users", column: "creator_id"
 end

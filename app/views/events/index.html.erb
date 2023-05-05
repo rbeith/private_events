@@ -1,9 +1,9 @@
 <h1>Events</h1>
 
-<ul>
-	<%= @events.each do |event| %>
-		<li>
-			<%= event.title %>
-		</li>
-	<% end %>
-</ul>
+<%= render "shared/event_display" %>
+
+<%= link_to "Your Events", user_path(@user) %>
+
+<%= link_to "Create New Event", new_event_path %>
+
+<%= render "shared/footer" %>
