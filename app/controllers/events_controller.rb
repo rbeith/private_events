@@ -2,6 +2,8 @@ class EventsController < ApplicationController
 	def index
 		@events = Event.all
 		@user = current_user
+		@past_events = Event.past
+		@future_events = Event.future
 	end
 
 	def new
@@ -10,7 +12,7 @@ class EventsController < ApplicationController
 
 	def show
 		@user = current_user
-		@event = @user.events.last
+		@event = Event.find(params[:id])
 	end
 
 	def create

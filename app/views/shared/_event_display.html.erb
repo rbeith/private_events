@@ -1,5 +1,5 @@
 <ul>
-	<% @events.each do |event| %>
+	<% @past_events.each do |event| %>
 		<h2>
 			<%= event.title %>
 		</h2>
@@ -7,7 +7,25 @@
 			<%= event.description %>
 		</p>
 		<p>
-			Location: <%= event.location %>
+			LOCATION: <%= event.location %>
 		</p>
+		<div>The Who's who...
+			<ul>
+				<% event.attendees.each do |attendee| %>
+					<li><%= attendee.email %></li>
+				<% end %>
+			</ul>
+		</div><br>
+
+		<%
+=begin%>
+ <% if EventAttendance.where("attendee = ? AND attended_event = ?", event.id, current_user.id) == event %>
+			<%= link_to "View Event Details", event_path(event.id) %>
+		<% else %>
+		<% end %> 
+<%
+=end%>
+		  <%= button_to "Attend Event?", event_attendances_path, params: { attended_event_id: current_user.id, attendee_id: event.id} %>
+
 	<% end %>
 </ul>

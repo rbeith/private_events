@@ -2,4 +2,29 @@
 
 <%= render "shared/event_display" %>
 
+<div>
+	<h2>Your Attendances</h2>
+		<% @attended_events = EventAttendance.where("attendee_id = ?", current_user) %>
+		<div>
+			<h3>Upcoming Events</h2>
+				<% events = Event.where("date > ?", Time.now)%>
+					<% events.each do |e| %>
+						<div>
+						<li><b><%= e.title %></b></li>
+						<li><%= e.date.to_date %></li>
+						</div>
+					<% end %>
+		</div>
+		<div>
+			<h3>Past Events</h2>
+				<% events = Event.where("date < ?", Time.now) %>
+					<% events.each do |e| %>
+						<div>
+						<li><b><%= e.title %></b></li>
+						<li><%= e.date.to_date %></li>
+						</div>
+					<% end %>
+		</div>
+</div><br><br>
+
 <%= render "shared/footer" %>

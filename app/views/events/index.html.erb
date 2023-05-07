@@ -1,6 +1,6 @@
 <h1>Events</h1>
 
-<%= render "shared/event_display" %>
+<%= render "shared/event_display", locals: { events: @events } %>
 
 <%= link_to "Your Events", user_path(@user) %>
 

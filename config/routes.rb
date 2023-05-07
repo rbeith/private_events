@@ -9,5 +9,5 @@ Rails.application.routes.draw do
 
 	resources :events, only: [:new, :create, :index, :show]
 	resources :users, only: [:show]
-	resources :event_attendance, only: [:new, :create]
+	resources :event_attendances, only: [:new, :create]
 end
