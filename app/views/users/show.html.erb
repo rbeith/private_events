@@ -1,9 +1,12 @@
-<h1>Your Events</h1>
+<h1>You are hosting these Events:</h1>
 
-<%= render "shared/event_display" %>
+<% @events.each do |event| %>
+<li><%= event.title %></li>
+<% end %>
+
 
 <div>
-	<h2>Your Attendances</h2>
+	<h1>You signed up to attend the following:</h1>
 		<% @attended_events = EventAttendance.where("attendee_id = ?", current_user) %>
 		<div>
 			<h3>Upcoming Events</h2>

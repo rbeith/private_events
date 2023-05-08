@@ -1,5 +1,6 @@
+<h2>Upcoming Events</h2>
 <ul>
-	<% @past_events.each do |event| %>
+	<% @future_events.each do |event| %>
 		<h2>
 			<%= event.title %>
 		</h2>
@@ -8,6 +9,9 @@
 		</p>
 		<p>
 			LOCATION: <%= event.location %>
+		</p>
+		<p>
+			DATE: <%= event.date.to_date %>
 		</p>
 		<div>The Who's who...
 			<ul>
@@ -26,6 +30,40 @@
 <%
 =end%>
 		  <%= button_to "Attend Event?", event_attendances_path, params: { attended_event_id: current_user.id, attendee_id: event.id} %>
+	<% end %>
+</ul>
 
+<h2>Past Events</h2>
+<ul>
+	<% @past_events.each do |event| %>
+		<h2>
+			<%= event.title %>
+		</h2>
+		<p>
+			<%= event.description %>
+		</p>
+		<p>
+			LOCATION: <%= event.location %>
+		</p>
+		<p>
+			DATE: <%= event.date.to_date %>
+		</p>
+		<div>The Who's who...
+			<ul>
+				<% event.attendees.each do |attendee| %>
+					<li><%= attendee.email %></li>
+				<% end %>
+			</ul>
+		</div><br>
+
+		<%
+=begin%>
+ <% if EventAttendance.where("attendee = ? AND attended_event = ?", event.id, current_user.id) == event %>
+			<%= link_to "View Event Details", event_path(event.id) %>
+		<% else %>
+		<% end %> 
+<%
+=end%>
+		  <%= button_to "Attend Event?", event_attendances_path, params: { attended_event_id: current_user.id, attendee_id: event.id} %>
 	<% end %>
 </ul>

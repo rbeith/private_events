@@ -3,11 +3,11 @@ class Event < ApplicationRecord
 	has_many :attendees, through: :event_attendances, source: :attended_event
 	belongs_to :creator, class_name: "User", foreign_key: :creator_id
 
-	def past
+	def self.past
 		Event.where("date < ?", Time.now)
 	end
 
-	def future
+	def self.future
 		Event.where("date > ?", Time.now)
 	end
 end
