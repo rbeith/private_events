@@ -1,5 +1,6 @@
 <h1>Events</h1>
 
+<%= "Welcome  #{current_user.email}" %><p>
 <h2>Upcoming Events</h2>
 <ul>
 	<% @future_events.each do |event| %>
@@ -31,7 +32,7 @@
 		<% end %> 
 <%
 =end%>
-		  <%= button_to "Attend Event?", event_attendances_path, params: { attended_event_id: current_user.id, attendee_id: event.id} %>
+		  <%= button_to "Attend Event?", event_attendances_path, params: { user_id: current_user.id, event_id: event.id} %>
 	<% end %>
 </ul>
 
@@ -52,8 +53,8 @@
 		</p>
 		<div>The Who's who...
 			<ul>
-				<% event.attendees.each do |attendee| %>
-					<li><%= attendee.email %></li>
+				<% event.attendees.each do |attendees| %>
+					<li><%= attendees.email %></li>
 				<% end %>
 			</ul>
 		</div><br>
@@ -69,7 +70,7 @@
 	<% end %>
 </ul>
 
-<%= link_to "Your Events", user_path(@user) %>
+<%= link_to "Your Events", user_path(@user) %><br>
 
 <%= link_to "Create New Event", new_event_path %>
 
