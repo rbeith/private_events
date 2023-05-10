@@ -7,6 +7,7 @@
 	<div><b>Date:</b>
 	<%= @event.date.to_date %></div>
 </div><br><br>
+<%= link_to "Edit?", edit_user_path(@event) %><br>
 
 <%= link_to "Your Events", user_path(@user) %>
 

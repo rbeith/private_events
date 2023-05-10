@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
 	root "events#index"
 
-	resources :events, only: [:new, :create, :index, :show]
-	resources :users, only: [:show]
+	resources :events, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+	resources :users, only: [:show, :edit, :destroy]
 	resources :event_attendances, only: [:new, :create]
 end

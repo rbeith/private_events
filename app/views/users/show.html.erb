@@ -2,6 +2,7 @@
 
 <% @events.each do |event| %>
 <li><%= event.title %></li>
+<%= link_to "Edit?", edit_user_path(event) %>
 <% end %>
 
 
@@ -29,5 +30,7 @@
 					<% end %>
 		</div>
 </div><br><br>
+
+<%= link_to "Create New Event", new_event_path %>
 
 <%= render "shared/footer" %>

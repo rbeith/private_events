@@ -17,14 +17,33 @@ class EventsController < ApplicationController
 
 	def create
 		@event = current_user.events.build(event_params)
-
 		if @event.save
 			redirect_to @event
 		else
 			render :new, status: :unprocessable_entity
 		end
-
 	end
+	
+	def update
+		@event = Event.find(params[:id])
+		if @event.update(event_params)
+			flash.notice = "Event item successfully updated!"
+			redirect_to event_url(@event)
+		else
+			flash.now.alert = "Edit failed to update."
+			render :edit
+		end
+	end
+
+	def destroy
+		@event = Event.find(params[:id])
+		if @event.destroy
+			redirect_to event_url(@event), notice: "Event item deleted."
+		else
+			flash.now.error = "Failed to delete."
+			render :edit
+		end
+	end 
 
 	private
 
