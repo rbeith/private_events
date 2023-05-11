@@ -10,4 +10,6 @@ class User < ApplicationRecord
 	has_many :attended_events, through: :event_attendances
 
 	belongs_to :creator, class_name: "User", optional: true
+
+	validates :attended_events, uniqueness: true
 end

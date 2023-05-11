@@ -4,6 +4,7 @@ class EventsController < ApplicationController
 		@user = current_user
 		@past_events = Event.past
 		@future_events = Event.future
+		@attendances = EventAttendance.where("attendee_id = ?", @user.id)
 	end
 
 	def new

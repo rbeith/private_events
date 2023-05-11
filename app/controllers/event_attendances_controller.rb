@@ -20,6 +20,11 @@ class EventAttendancesController < ApplicationController
 		end
 	end
 
+	def destroy
+		@attendance = EventAttendance.find_by attendee_id: params[:user_id], attended_event_id: params[:event_id]
+		@attendance.destroy
+	end
+
 	private
 
 	def attendance_params

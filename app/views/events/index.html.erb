@@ -23,16 +23,9 @@
 				<% end %>
 			</ul>
 		</div><br>
+		  <%= button_to "Attend Event?", event_attendances_path, params: { user_id: current_user.id, event_id: event.id } %>
+			<%= button_to "Cancel Attendance?", event_attendance_path(current_user), params: { user_id: current_user.id, event_id: event.id }, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
 
-		<%
-=begin%>
- <% if EventAttendance.where("attendee = ? AND attended_event = ?", event.id, current_user.id) == event %>
-			<%= link_to "View Event Details", event_path(event.id) %>
-		<% else %>
-		<% end %> 
-<%
-=end%>
-		  <%= button_to "Attend Event?", event_attendances_path, params: { user_id: current_user.id, event_id: event.id} %>
 	<% end %>
 </ul>
 

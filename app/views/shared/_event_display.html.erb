@@ -65,5 +65,6 @@
 <%
 =end%>
 		  <%= button_to "Attend Event?", event_attendances_path, params: { attended_event_id: current_user.id, attendee_id: event.id} %>
+			<%= button_to "Cancel Attendance?", event_path, method: :delete %>
 	<% end %>
 </ul>
